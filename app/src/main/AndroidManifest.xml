@@ -13,8 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.laily.globalprint.ui.login.LoginActivity"></activity>
-        <activity android:name="com.laily.globalprint.ui.dashboard.DashboardActivity" />
+        <activity android:name=".ui.pelanggan.PelangganActivity"></activity>
+        <activity android:name=".ui.login.LoginActivity" />
+        <activity android:name=".ui.dashboard.DashboardActivity" />
         <activity android:name=".MainEmptyActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
