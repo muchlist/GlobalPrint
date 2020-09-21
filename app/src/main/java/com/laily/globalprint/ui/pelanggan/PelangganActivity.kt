@@ -1,5 +1,6 @@
 package com.laily.globalprint.ui.pelanggan
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.laily.globalprint.R
 import com.laily.globalprint.data.PelangganDetailResponse
 import com.laily.globalprint.data.PelangganListResponse
+import com.laily.globalprint.recycler_adapter.PelangganAdapter
+import com.laily.globalprint.utils.App
 import kotlinx.android.synthetic.main.activity_pelanggan.*
 
 class PelangganActivity : AppCompatActivity() {
@@ -40,7 +43,7 @@ class PelangganActivity : AppCompatActivity() {
         memantauPerubahanDiSearchBar()
 
         fab_pelanggan.setOnClickListener {
-            //TODO menujuKeAktifityMenambahkanPelanggan()
+            startActivity(Intent(this, TambahPelangganActivity::class.java))
         }
 
         // Menyembunyikan KEYBOARD
@@ -109,4 +112,12 @@ class PelangganActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        if (App.activityListPelangganHarusDiRefresh) {
+            loadPelanggan()
+            App.activityListPelangganHarusDiRefresh = false
+        }
+    }
 }

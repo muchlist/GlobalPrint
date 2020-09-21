@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -23,13 +22,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="ID Pelanggan : "
+            android:text="ID Karyawan : "
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_item_id_pelanggan"
+            android:id="@+id/tv_item_id_karyawan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -40,7 +39,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_item_nama_pelanggan"
+            android:id="@+id/tv_item_nama_karyawan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -53,57 +52,34 @@
             tools:text="Laily" />
 
         <TextView
-            android:id="@+id/tv_item_email_pelanggan"
+            android:id="@+id/tv_item_role_karyawan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_item_nama_pelanggan"
-            tools:text="laily@gmail.com" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_nama_karyawan"
+            tools:text="admin" />
 
         <TextView
-            android:id="@+id/tv_item_no_hp_pelanggan"
+            android:id="@+id/tv_item_no_hp_karyawan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_item_email_pelanggan"
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_role_karyawan"
             tools:text="08131313123123" />
 
         <TextView
-            android:id="@+id/tv_item_alamat_pelanggan"
+            android:id="@+id/tv_item_masa_kerja_karyawan"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/bt_item_hapus_pelanggan"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_item_no_hp_pelanggan"
-            tools:text="Jl Belda Gg Karya Penghulu" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_no_hp_karyawan"
+            tools:text="Tanggal bergabung : 20 -12 -2020" />
 
-        <ImageView
-            android:id="@+id/bt_item_edit_pelanggan"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_margin="8dp"
-            android:layout_marginTop="8dp"
-            android:src="@drawable/ic_baseline_edit_24"
-            app:layout_constraintEnd_toStartOf="@+id/bt_item_hapus_pelanggan"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/bt_item_hapus_pelanggan"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_margin="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:src="@drawable/ic_baseline_delete_24"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

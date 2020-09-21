@@ -33,6 +33,12 @@ interface ApiService {
         @Header("Content-Type") contentType: String = "application/json"
     ): Call<LoginResponse>
 
+    @GET("/api/users")
+    fun mengambilListUser(
+        @Header("Content-Type") contentType: String = "application/json",
+        @Header("Authorization") token: String,
+    ): Call<UserListResponse>
+
     // PELANGGAN --------------------------------------------------------------
     @POST("/api/pelanggan")
     fun membuatPelanggan(

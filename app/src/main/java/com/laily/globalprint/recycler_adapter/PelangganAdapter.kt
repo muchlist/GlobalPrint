@@ -1,4 +1,4 @@
-package com.laily.globalprint.ui.pelanggan
+package com.laily.globalprint.recycler_adapter
 
 import android.content.Context
 import android.view.LayoutInflater

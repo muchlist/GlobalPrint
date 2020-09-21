@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.laily.globalprint.data.LoginRequest
 import com.laily.globalprint.data.LoginResponse
-import com.laily.globalprint.repository.LoginRepo
+import com.laily.globalprint.repository.UserRepo
 import com.laily.globalprint.utils.App
 
 class LoginViewModel : ViewModel() {
@@ -31,7 +31,7 @@ class LoginViewModel : ViewModel() {
     fun melakukanLoginKeServer(data: LoginRequest) {
         _isLoading.value = true
         _isError.value = ""
-        LoginRepo.melakukanLogin(data) { response, error ->
+        UserRepo.melakukanLogin(data) { response, error ->
             if (error.isNotEmpty()) {
                 // jika terjadi error pada login
                 _isLoading.value = false
