@@ -49,9 +49,8 @@ class PelangganAdapter(
 
                 //onClick
                 bt_item_edit_pelanggan.setOnClickListener { editClick(items) }
-                bt_item_hapus_pelanggan.setOnLongClickListener{
+                bt_item_hapus_pelanggan.setOnClickListener{
                     hapusClick(items)
-                    false
                 }
             }
         }

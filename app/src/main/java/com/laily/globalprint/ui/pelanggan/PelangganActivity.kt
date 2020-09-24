@@ -3,6 +3,7 @@ package com.laily.globalprint.ui.pelanggan
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -60,6 +61,12 @@ class PelangganActivity : AppCompatActivity() {
             })
             isLoading.observe(this@PelangganActivity, { menampilkanLoading(it) })
             messageError.observe(this@PelangganActivity, { menampilkanToastError(it) })
+            isPelangganDeleted.observe(this@PelangganActivity, {
+                if (it){
+                    loadPelanggan()
+                    menampilkanToastError("Mengahapus pelanggan berhasil")
+                }
+            })
         }
     }
 
@@ -71,9 +78,15 @@ class PelangganActivity : AppCompatActivity() {
         rv_pelanggan.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
-        //TODO ganti klik
-        val editClick: (PelangganDetailResponse) -> Unit = { menampilkanToastError("edit") }
-        val hapusClick: (PelangganDetailResponse) -> Unit = { menampilkanToastError("edit") }
+
+        val editClick: (PelangganDetailResponse) -> Unit = {
+            val intent = Intent(this, EditPelangganActivity::class.java)
+            intent.putExtra("data", it)
+            startActivity(intent)
+        }
+
+        val hapusClick: (PelangganDetailResponse) -> Unit =
+            { memunculkanDialogHapusPelanggan(it.id) }
 
         pelangganAdapter = PelangganAdapter(this, dataPelanggan, editClick, hapusClick)
         rv_pelanggan.adapter = pelangganAdapter
@@ -84,6 +97,7 @@ class PelangganActivity : AppCompatActivity() {
         et_cari_pelanggan.setOnQueryTextListener(object :
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextChange(newText: String): Boolean {
+                loadPelanggan(nama = newText)
                 return false
             }
 
@@ -94,6 +108,23 @@ class PelangganActivity : AppCompatActivity() {
                 return false
             }
         })
+    }
+
+    private fun memunculkanDialogHapusPelanggan(pelangganID: String) {
+        val builder = AlertDialog.Builder(this)
+
+        builder.setTitle("Konfirmasi")
+        builder.setMessage("Yakin ingin menghapus pelanggan?")
+
+        builder.setPositiveButton("Ya") { _, _ ->
+            viewModel.menghapusPelangganDariServer(pelangganID)
+        }
+        builder.setNeutralButton("Batal") { _, _ ->
+
+        }
+        val alertDialog: AlertDialog = builder.create()
+        alertDialog.setCancelable(false)
+        alertDialog.show()
     }
 
     private fun memunculkanDataDiRecyclerView(data: PelangganListResponse) {
@@ -114,7 +145,6 @@ class PelangganActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-
         if (App.activityListPelangganHarusDiRefresh) {
             loadPelanggan()
             App.activityListPelangganHarusDiRefresh = false

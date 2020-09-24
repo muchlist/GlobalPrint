@@ -3,18 +3,18 @@ package com.laily.globalprint.ui.pelanggan
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.laily.globalprint.data.PelangganRequest
+import com.laily.globalprint.data.PelangganEditRequest
 import com.laily.globalprint.repository.PelangganRepo
 
-class TambahPelangganViewModel : ViewModel() {
+class EditPelangganViewModel : ViewModel() {
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean>
         get() = _isLoading
 
-    private val _isPelangganCreatedAndFinish = MutableLiveData<Boolean>()
-    val isPelangganCreatedAndFinish: LiveData<Boolean>
-        get() = _isPelangganCreatedAndFinish
+    private val _isPelangganEditedAndFinish = MutableLiveData<Boolean>()
+    val isPelangganEditedAndFinish: LiveData<Boolean>
+        get() = _isPelangganEditedAndFinish
 
     private val _messageError = MutableLiveData<String>()
     val messageError: LiveData<String>
@@ -27,26 +27,25 @@ class TambahPelangganViewModel : ViewModel() {
 
     init {
         _isLoading.value = false
-        _isPelangganCreatedAndFinish.value = false
+        _isPelangganEditedAndFinish.value = false
         _messageError.value = ""
         _messageSuccess.value = ""
     }
 
-    fun menambahkanPelangganKeServer(args: PelangganRequest) {
+    fun mengeditPelangganKeServer(pelangganID: String, args: PelangganEditRequest) {
         _isLoading.value = true
-        _isPelangganCreatedAndFinish.value = false
-        PelangganRepo.createPelanggan(
-            args = args
+        _isPelangganEditedAndFinish.value = false
+        PelangganRepo.editPelanggan(
+            pelangganID = pelangganID, args = args
         ) { response, error ->
             if (error.isNotEmpty()) {
                 _isLoading.value = false
                 _messageError.value = error
-                return@createPelanggan
+                return@editPelanggan
             }
             response.let {
                 _isLoading.value = false
-                _messageSuccess.value = it?.msg
-                _isPelangganCreatedAndFinish.value = true
+                _isPelangganEditedAndFinish.value = true
             }
         }
     }

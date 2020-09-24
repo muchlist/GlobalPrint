@@ -22,8 +22,13 @@ class PelangganViewModel : ViewModel() {
     val messageError: LiveData<String>
         get() = _messageError
 
+    private val _isPelangganDeleted = MutableLiveData<Boolean>()
+    val isPelangganDeleted: LiveData<Boolean>
+        get() = _isPelangganDeleted
+
     init {
         _isLoading.value = false
+        _isPelangganDeleted.value = false
         _messageError.value = ""
     }
 
@@ -42,6 +47,24 @@ class PelangganViewModel : ViewModel() {
                 _isLoading.value = false
                 _dataPelanggan.postValue(it)
                 _isLoading.value = false
+            }
+        }
+    }
+
+    fun menghapusPelangganDariServer(pelangganID: String) {
+        _isLoading.value = true
+        _messageError.value = ""
+        _isPelangganDeleted.value = false
+
+        PelangganRepo.deletePelanggan(pelangganID = pelangganID) { response, error ->
+            if (error.isNotEmpty()) {
+                _isLoading.value = false
+                _messageError.value = error
+                return@deletePelanggan
+            }
+            response.let {
+                _isLoading.value = false
+                _isPelangganDeleted.value = true
             }
         }
     }

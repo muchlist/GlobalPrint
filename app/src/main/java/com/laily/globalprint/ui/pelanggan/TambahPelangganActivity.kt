@@ -57,7 +57,7 @@ class TambahPelangganActivity : AppCompatActivity() {
     private fun mengawasiViewModel() {
         viewModel.run {
             isPelangganCreatedAndFinish.observe(this@TambahPelangganActivity, Observer {
-                killActivityIfComputerCreated(it)
+                matikanActivityJikaPelangganBerhasilDibuat(it)
             })
             isLoading.observe(this@TambahPelangganActivity, Observer { tampilkanLoading(it) })
             messageError.observe(this@TambahPelangganActivity, Observer { tampilkanToast(it) })
@@ -65,7 +65,7 @@ class TambahPelangganActivity : AppCompatActivity() {
         }
     }
 
-    private fun killActivityIfComputerCreated(isCreated: Boolean) {
+    private fun matikanActivityJikaPelangganBerhasilDibuat(isCreated: Boolean) {
         if (isCreated) {
             App.activityListPelangganHarusDiRefresh = true
             finish()

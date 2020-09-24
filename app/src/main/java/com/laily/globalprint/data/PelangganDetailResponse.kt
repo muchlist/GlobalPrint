@@ -1,8 +1,11 @@
 package com.laily.globalprint.data
 
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class PelangganDetailResponse(
     @Json(name = "aktif")
     val aktif: Boolean,
@@ -30,4 +33,4 @@ data class PelangganDetailResponse(
     val totalHutang: Int,
     @Json(name = "total_transaksi_lunas")
     val totalTransaksiLunas: Int
-)
+): Parcelable
