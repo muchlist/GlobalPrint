@@ -1,5 +1,6 @@
 package com.laily.globalprint.ui.bahan
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -42,7 +43,7 @@ class BahanActivity : AppCompatActivity() {
         memantauPerubahanDiSearchBar()
 
         fab_bahan.setOnClickListener {
-            //TODO startActivity(Intent(this, TambahBahanActivity::class.java))
+            startActivity(Intent(this, TambahBahanActivity::class.java))
         }
 
         // Menyembunyikan KEYBOARD

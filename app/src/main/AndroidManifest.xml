@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.bahan.BahanActivity"></activity>
+        <activity android:name=".ui.bahan.TambahBahanActivity"></activity>
+        <activity android:name=".ui.bahan.BahanActivity" />
         <activity android:name=".ui.crud.CrudListActivity" />
         <activity android:name=".ui.pelanggan.EditPelangganActivity" />
         <activity android:name=".ui.pelanggan.TambahPelangganActivity" />
