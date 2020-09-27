@@ -7,6 +7,7 @@ class App : Application() {
     companion object {
         lateinit var prefs: SharedPrefs
         var activityListPelangganHarusDiRefresh : Boolean = false
+        var activityListCrudHarusDiRefresh : Boolean = false
     }
 
     override fun onCreate() {

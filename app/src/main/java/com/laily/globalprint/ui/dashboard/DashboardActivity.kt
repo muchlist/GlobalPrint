@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.laily.globalprint.R
+import com.laily.globalprint.ui.crud.CrudListActivity
 import com.laily.globalprint.ui.karyawan.KaryawanActivity
 import com.laily.globalprint.ui.pelanggan.PelangganActivity
 import com.laily.globalprint.utils.App
@@ -23,6 +24,10 @@ class DashboardActivity : AppCompatActivity() {
 
         cv_karyawan.setOnClickListener {
             startActivity(Intent(this, KaryawanActivity::class.java))
+        }
+
+        cv_penjualan.setOnClickListener {
+            startActivity(Intent(this, CrudListActivity::class.java))
         }
     }
 }
