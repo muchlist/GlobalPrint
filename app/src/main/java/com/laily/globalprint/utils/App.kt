@@ -8,6 +8,7 @@ class App : Application() {
         lateinit var prefs: SharedPrefs
         var activityListPelangganHarusDiRefresh : Boolean = false
         var activityListCrudHarusDiRefresh : Boolean = false
+        var activityListBahanHarusDiRefresh : Boolean = false
     }
 
     override fun onCreate() {
