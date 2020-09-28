@@ -73,9 +73,9 @@ class BahanActivity : AppCompatActivity() {
 
 
         val editClick: (BahanDetailResponse) -> Unit = {
-//            val intent = Intent(this, EditBahanActivity::class.java)
-//            intent.putExtra("data", it)
-//            startActivity(intent)
+            val intent = Intent(this, EditBahanActivity::class.java)
+            intent.putExtra("data_bahan", it)
+            startActivity(intent)
         }
 
         bahanAdapter = BahanAdapter(this, dataBahan, editClick)

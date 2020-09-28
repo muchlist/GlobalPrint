@@ -1,8 +1,11 @@
 package com.laily.globalprint.data
 
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class BahanDetailResponse(
     @Json(name = "diupdate")
     val diupdate: String,
@@ -22,4 +25,4 @@ data class BahanDetailResponse(
     val satuan: String,
     @Json(name = "spek")
     val spek: String
-)
+): Parcelable
