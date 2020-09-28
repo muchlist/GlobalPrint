@@ -9,6 +9,8 @@ import com.laily.globalprint.ui.bahan.BahanActivity
 import com.laily.globalprint.ui.crud.CrudListActivity
 import com.laily.globalprint.ui.karyawan.KaryawanActivity
 import com.laily.globalprint.ui.pelanggan.PelangganActivity
+import com.laily.globalprint.ui.pelanggan.TambahPelangganActivity
+import com.laily.globalprint.ui.pemesanan.TambahPesananActivity
 import com.laily.globalprint.utils.App
 import kotlinx.android.synthetic.main.activity_dashboard.*
 
@@ -19,6 +21,12 @@ class DashboardActivity : AppCompatActivity() {
         setContentView(R.layout.activity_dashboard)
 
         tv_greeting.text = "Hallo ${App.prefs.nameSave}"
+
+
+        cv_pemesanan.setOnClickListener {
+            startActivity(Intent(this, TambahPesananActivity::class.java))
+        }
+
         cv_pelanggan.setOnClickListener {
             startActivity(Intent(this, PelangganActivity::class.java))
         }
