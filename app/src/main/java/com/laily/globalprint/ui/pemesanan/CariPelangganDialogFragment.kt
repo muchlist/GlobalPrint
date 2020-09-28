@@ -30,9 +30,6 @@ class CariPelangganDialogFragment : DialogFragment() {
     ): View? {
         val rootView: View =
             inflater.inflate(R.layout.fragment_dialog_cari_pelanggan, container, false)
-//        rootView.cancel_button.setOnClickListener(){
-//            //dismiss()
-//        }
         return rootView
     }
 
@@ -46,6 +43,8 @@ class CariPelangganDialogFragment : DialogFragment() {
         setRecyclerView()
 
         memantauPerubahanDiSearchBar()
+
+        loadPelanggan("")
     }
 
     private fun mengawasiViewModel() {

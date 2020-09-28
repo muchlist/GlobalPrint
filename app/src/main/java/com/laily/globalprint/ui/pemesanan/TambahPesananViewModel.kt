@@ -3,12 +3,10 @@ package com.laily.globalprint.ui.pemesanan
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.laily.globalprint.data.BahanDetailResponse
-import com.laily.globalprint.data.BahanListResponse
-import com.laily.globalprint.data.PelangganDetailResponse
-import com.laily.globalprint.data.PelangganListResponse
+import com.laily.globalprint.data.*
 import com.laily.globalprint.repository.BahanRepo
 import com.laily.globalprint.repository.PelangganRepo
+import com.laily.globalprint.repository.PesananRepo
 
 class TambahPesananViewModel : ViewModel() {
 
@@ -41,6 +39,10 @@ class TambahPesananViewModel : ViewModel() {
     private val _messageError = MutableLiveData<String>()
     val messageError: LiveData<String>
         get() = _messageError
+
+    private val _isPesananCreated = MutableLiveData<Boolean>()
+    val isPesananCreated: LiveData<Boolean>
+        get() = _isPesananCreated
 
     init {
         _isLoading.value = false
@@ -89,6 +91,24 @@ class TambahPesananViewModel : ViewModel() {
 
     fun pilihBahan(data: BahanDetailResponse) {
         _dataBahanTerpilih.postValue(data)
+    }
+
+    fun menambahkanPesananKeServer(args: PesananRequest) {
+        _isLoading.value = true
+        _messageError.value = ""
+        _isPesananCreated.value = false
+        PesananRepo.createPesanan(args = args) { response, error ->
+            if (error.isNotEmpty()) {
+                _isLoading.value = false
+                _messageError.value = error
+                return@createPesanan
+            }
+            response?.let {
+                _isLoading.value = false
+                _messageError.value = it.msg
+                _isPesananCreated.value = true
+            }
+        }
     }
 
 

@@ -9,6 +9,7 @@ class App : Application() {
         var activityListPelangganHarusDiRefresh : Boolean = false
         var activityListCrudHarusDiRefresh : Boolean = false
         var activityListBahanHarusDiRefresh : Boolean = false
+        var activityListPesananHarusDiRefresh : Boolean = false
     }
 
     override fun onCreate() {

@@ -133,6 +133,13 @@ interface ApiService {
         @Part("image\"; filename=\"pp.jpg\" ") image: RequestBody
     ): Call<BahanDetailResponse>
 
+    //----------------------------------------- PESANAN
+    @POST("/api/pesanan")
+    fun membuatPesanan(
+        @Body args: PesananRequest,
+        @Header("Content-Type") contentType: String = "application/json",
+        @Header("Authorization") token: String,
+    ): Call<MessageResponse>
 
 
     // ---------------------------------------- CRUD
