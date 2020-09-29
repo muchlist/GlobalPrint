@@ -141,6 +141,26 @@ interface ApiService {
         @Header("Authorization") token: String,
     ): Call<MessageResponse>
 
+    //{{url}}/api/pesanan?nama=&lunas=0&pelanggan=&bahan=   //nama pelanggan
+    @GET("/api/pesanan")
+    fun mengambilListPesanan(
+        @Header("Content-Type") contentType: String = "application/json",
+        @Header("Authorization") token: String,
+        @Query("nama") nama: String = "",
+        @Query("lunas") lunas: Int = 0,
+        @Query("pelanggan") pelanggan: String = "",
+        @Query("bahan") bahan: String = "",
+    ): Call<PesananListResponse>
+
+    @GET("/api/pesanan/{id}")
+    fun mengambilDetailPesanan(
+        @Header("Content-Type") contentType: String = "application/json",
+        @Header("Authorization") token: String,
+        @Path("id") id: String,
+    ): Call<PesananDetailResponse>
+
+
+
 
     // ---------------------------------------- CRUD
     @POST("/api/crud")

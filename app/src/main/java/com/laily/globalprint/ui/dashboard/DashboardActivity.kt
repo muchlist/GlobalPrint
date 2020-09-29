@@ -10,6 +10,7 @@ import com.laily.globalprint.ui.crud.CrudListActivity
 import com.laily.globalprint.ui.karyawan.KaryawanActivity
 import com.laily.globalprint.ui.pelanggan.PelangganActivity
 import com.laily.globalprint.ui.pelanggan.TambahPelangganActivity
+import com.laily.globalprint.ui.pemesanan.PesananActivity
 import com.laily.globalprint.ui.pemesanan.TambahPesananActivity
 import com.laily.globalprint.utils.App
 import kotlinx.android.synthetic.main.activity_dashboard.*
@@ -36,7 +37,7 @@ class DashboardActivity : AppCompatActivity() {
         }
 
         cv_penjualan.setOnClickListener {
-            startActivity(Intent(this, CrudListActivity::class.java))
+            startActivity(Intent(this, PesananActivity::class.java))
         }
 
         cv_katalog.setOnClickListener {

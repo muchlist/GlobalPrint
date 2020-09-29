@@ -1,5 +1,6 @@
 package com.laily.globalprint.ui.pemesanan
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +19,7 @@ class TambahPesananActivity : AppCompatActivity() {
 
     private lateinit var viewModel: TambahPesananViewModel
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tambah_pesanan)
@@ -60,16 +62,32 @@ class TambahPesananActivity : AppCompatActivity() {
             val ukuranY = etf_tambah_pesanan_y.editText?.text.toString().toIntOrNull() ?: 1
             val harga = viewModel.getDataBahanTerpilih().value?.harga ?: -1
 
-            if (qty < 0 || uangMuka < 0 || harga < 0){
+            if (qty < 0 || uangMuka < 0 || harga < 0) {
                 menampilkanToast("Harap lengkapi form terlebih dahulu")
                 return@setOnClickListener
             }
 
-            val kalkulasi = (harga * ukuranX * ukuranY * qty) - uangMuka
-            if (sw_pesanan_lunas.isChecked){
-                tv_tambah_pesanan_sisa_bayar.setText("Sisa bayar :\n${TransformInt().toRupiahString(0)}")
-            }else{
-                tv_tambah_pesanan_sisa_bayar.setText("Sisa bayar :\n${TransformInt().toRupiahString(kalkulasi)}")
+            val total = harga * ukuranX * ukuranY * qty
+            val kalkulasi = total - uangMuka
+
+            tv_tambah_pesanan_total.setText("Total :\n${TransformInt().toRupiahString(total)}")
+
+            if (sw_pesanan_lunas.isChecked) {
+                tv_tambah_pesanan_sisa_bayar.setText(
+                    "Sisa bayar :\n${
+                        TransformInt().toRupiahString(
+                            0
+                        )
+                    }"
+                )
+            } else {
+                tv_tambah_pesanan_sisa_bayar.setText(
+                    "Sisa bayar :\n${
+                        TransformInt().toRupiahString(
+                            kalkulasi
+                        )
+                    }"
+                )
             }
 
 

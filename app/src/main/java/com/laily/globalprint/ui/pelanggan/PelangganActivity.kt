@@ -13,6 +13,7 @@ import com.laily.globalprint.data.PelangganListResponse
 import com.laily.globalprint.recycler_adapter.PelangganAdapter
 import com.laily.globalprint.utils.App
 import kotlinx.android.synthetic.main.activity_pelanggan.*
+import kotlinx.android.synthetic.main.activity_pesanan.*
 
 class PelangganActivity : AppCompatActivity() {
 
