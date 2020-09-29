@@ -33,6 +33,8 @@ data class PesananDetailResponse(
         val finishing: String,
         @Json(name = "harga_bahan")
         val hargaBahan: Int,
+        @Json(name = "satuan_bahan")
+        val satuanBahan: String = "",
         @Json(name = "id_bahan")
         val idBahan: String,
         @Json(name = "nama_bahan")

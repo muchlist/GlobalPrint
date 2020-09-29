@@ -33,11 +33,11 @@ class PesananViewModel  : ViewModel() {
     }
 
 
-    fun mendapatkanPesananDariServer(nama: String) {
+    fun mendapatkanPesananDariServer(nama: String, lunas: String) {
         _isLoading.value = true
         _messageError.value = ""
 
-        PesananRepo.retrievePesanan(nama = nama) { response, error ->
+        PesananRepo.retrievePesanan(nama = nama, lunas = lunas) { response, error ->
             if (error.isNotEmpty()) {
                 _isLoading.value = false
                 _messageError.value = error

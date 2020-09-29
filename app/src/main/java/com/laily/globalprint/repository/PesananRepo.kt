@@ -60,11 +60,13 @@ object PesananRepo {
 
     fun retrievePesanan(
         nama: String?,
+        lunas: String,
         callback: (response: PesananListResponse?, error: String) -> Unit
     ) {
         apiService.mengambilListPesanan(
             token = App.prefs.authTokenSave,
-            nama = nama?:""
+            nama = nama?:"",
+            lunas = lunas,
         ).enqueue(object : Callback<PesananListResponse> {
             override fun onResponse(
                 call: Call<PesananListResponse>,
@@ -135,6 +137,47 @@ object PesananRepo {
             override fun onFailure(call: Call<MessageResponse>, t: Throwable) {
                 t.message?.let {
                     if (it.contains("to connect")) {
+                        callback(null, ERR_CONN)
+                    } else {
+                        callback(null, it)
+                    }
+                }
+            }
+        })
+    }
+
+    fun lunasiPesanan(
+        pesananID: String,
+        callback: (response: PesananDetailResponse?, error: String) -> Unit
+    ) {
+        apiService.lunasiDetailPesanan(
+            token = App.prefs.authTokenSave,
+            id = pesananID
+        ).enqueue(object : Callback<PesananDetailResponse> {
+            override fun onResponse(
+                call: Call<PesananDetailResponse>,
+                response: Response<PesananDetailResponse>
+            ) {
+                when {
+                    response.isSuccessful -> {
+                        callback(response.body(), "")
+                    }
+                    response.code() == 400 || response.code() == 500 -> {
+                        val responseBody = response.errorBody()?.string() ?: ""
+                        callback(
+                            null,
+                            getMsgFromJson(responseBody)
+                        )
+                    }
+                    else -> {
+                        callback(null, response.code().toString())
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<PesananDetailResponse>, t: Throwable) {
+                t.message?.let {
+                    if (it.contains("to connect")){
                         callback(null, ERR_CONN)
                     } else {
                         callback(null, it)

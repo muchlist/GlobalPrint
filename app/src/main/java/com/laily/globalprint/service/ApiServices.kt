@@ -147,7 +147,7 @@ interface ApiService {
         @Header("Content-Type") contentType: String = "application/json",
         @Header("Authorization") token: String,
         @Query("nama") nama: String = "",
-        @Query("lunas") lunas: Int = 0,
+        @Query("lunas") lunas: String = "",
         @Query("pelanggan") pelanggan: String = "",
         @Query("bahan") bahan: String = "",
     ): Call<PesananListResponse>
@@ -158,6 +158,23 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("id") id: String,
     ): Call<PesananDetailResponse>
+
+    //{{url}}/api/pesanan/13R92020-3/lunas
+    @GET("/api/pesanan/{id}/lunas")
+    fun lunasiDetailPesanan(
+        @Header("Content-Type") contentType: String = "application/json",
+        @Header("Authorization") token: String,
+        @Path("id") id: String,
+    ): Call<PesananDetailResponse>
+
+    //{{url}}/api/pesanan/1292020-2   //delete
+    @DELETE("/api/pesanan/{id}")
+    fun hapusDetailPesanan(
+        @Header("Content-Type") contentType: String = "application/json",
+        @Header("Authorization") token: String,
+        @Path("id") id: String,
+    ): Call<ResponseBody>
+
 
 
 
