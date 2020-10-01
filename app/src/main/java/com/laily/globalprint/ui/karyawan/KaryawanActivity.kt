@@ -1,5 +1,6 @@
 package com.laily.globalprint.ui.karyawan
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.laily.globalprint.R
 import com.laily.globalprint.data.UserListResponse
 import com.laily.globalprint.recycler_adapter.KaryawanAdapter
+import com.laily.globalprint.utils.App
 import kotlinx.android.synthetic.main.activity_karyawan.*
 
 class KaryawanActivity : AppCompatActivity() {
@@ -35,6 +37,10 @@ class KaryawanActivity : AppCompatActivity() {
 
         //init computers
         loadKaryawan()
+
+        fab_crud.setOnClickListener {
+            startActivity(Intent(this, TambahKaryawanActivity::class.java))
+        }
 
     }
 
@@ -75,6 +81,14 @@ class KaryawanActivity : AppCompatActivity() {
     private fun menampilkanToastError(text: String) {
         if (text.isNotEmpty()) {
             Toast.makeText(this, text, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (App.activityListKaryawanHarusDiRefresh){
+            loadKaryawan()
+            App.activityListKaryawanHarusDiRefresh = false
         }
     }
 

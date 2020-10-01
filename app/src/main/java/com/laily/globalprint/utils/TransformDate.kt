@@ -21,3 +21,8 @@ fun String.toDate(): Date {
     }
     return date
 }
+
+fun Date.toStringInputDate(): String {
+    val formatEx = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSSSS", Locale.US)
+    return formatEx.format(this)
+}

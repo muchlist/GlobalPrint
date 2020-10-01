@@ -41,6 +41,14 @@ interface ApiService {
         @Header("Authorization") token: String,
     ): Call<UserListResponse>
 
+    @POST("/api/admin/register")
+    fun register(
+        @Body args: UserRequest,
+        @Header("Content-Type") contentType: String = "application/json",
+        @Header("Authorization") token: String
+    ): Call<MessageResponse>
+
+
     // PELANGGAN --------------------------------------------------------------
     @POST("/api/pelanggan")
     fun membuatPelanggan(

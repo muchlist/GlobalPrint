@@ -14,6 +14,44 @@ import retrofit2.Response
 object UserRepo {
     private val apiService: ApiService = Api.retrofitService
 
+    fun registerUser(
+        arg: UserRequest,
+        callback: (response: MessageResponse?, error: String) -> Unit
+    ) {
+        apiService.register(args = arg,token = App.prefs.authTokenSave).enqueue(object : Callback<MessageResponse> {
+            override fun onResponse(
+                call: Call<MessageResponse>,
+                response: Response<MessageResponse>
+            ) {
+                when {
+                    response.isSuccessful -> {
+                        callback(response.body(), "")
+                    }
+                    response.code() == 400 || response.code() == 500 -> {
+                        val responseBody = response.errorBody()?.string() ?: ""
+                        callback(
+                            null,
+                            getMsgFromJson(responseBody)
+                        )
+                    }
+                    else -> {
+                        callback(null, response.code().toString())
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<MessageResponse>, t: Throwable) {
+                t.message?.let {
+                    if (it.contains("to connect")) {
+                        callback(null, ERR_CONN)
+                    } else {
+                        callback(null, it)
+                    }
+                }
+            }
+        })
+    }
+
     fun melakukanLogin(
         loginRequest: LoginRequest,
         callback: (response: LoginResponse?, error: String) -> Unit
