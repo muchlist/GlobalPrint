@@ -273,6 +273,46 @@ object BahanRepo {
     }
 
 
+    fun getReportBahan(
+        callback: (response: MessageResponse?, error: String) -> Unit
+    ) {
+        apiService.reportsBahan(
+            token = App.prefs.authTokenSave,
+        ).enqueue(object : Callback<MessageResponse> {
+            override fun onResponse(
+                call: Call<MessageResponse>,
+                response: Response<MessageResponse>
+            ) {
+                when {
+                    response.isSuccessful -> {
+                        callback(response.body(), "")
+                    }
+                    response.code() == 400 || response.code() == 500 -> {
+                        val responseBody = response.errorBody()?.string() ?: ""
+                        callback(
+                            null,
+                            getMsgFromJson(responseBody)
+                        )
+                    }
+                    else -> {
+                        callback(null, response.code().toString())
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<MessageResponse>, t: Throwable) {
+                t.message?.let {
+                    if (it.contains("to connect")){
+                        callback(null, ERR_CONN)
+                    } else {
+                        callback(null, it)
+                    }
+                }
+            }
+        })
+    }
+
+
     private fun getMsgFromJson(errorBody: String): String {
         val jsonMarshaller = JsonMarshaller()
         return jsonMarshaller.getError(errorBody)?.msg ?: ERR_JSON_PARSING

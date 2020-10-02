@@ -88,6 +88,10 @@ class EditBahanActivity : AppCompatActivity() {
                 )
             }
         }
+
+        iv_back_button.setOnClickListener {
+            onBackPressed()
+        }
     }
 
 

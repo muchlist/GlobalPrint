@@ -68,6 +68,10 @@ class TambahKaryawanActivity : AppCompatActivity() {
                 viewModel.menambahkanKaryawanKeServer(karyawanRequest)
             }
         }
+
+        iv_back_button.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     private fun mengawasiViewModel() {

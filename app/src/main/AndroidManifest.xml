@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.karyawan.TambahKaryawanActivity"></activity>
+        <activity android:name=".ui.laporan.LaporanPesananActivity"></activity>
+        <activity android:name=".ui.laporan.LaporanActivity" />
+        <activity android:name=".ui.karyawan.TambahKaryawanActivity" />
         <activity android:name=".ui.pemesanan.PesananDetailActivity" />
         <activity android:name=".ui.pemesanan.PesananActivity" />
         <activity

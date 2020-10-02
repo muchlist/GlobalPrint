@@ -93,6 +93,9 @@ class TambahPesananActivity : AppCompatActivity() {
 
         }
 
+        iv_back_button.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     private fun mengawasiViewModel() {

@@ -49,6 +49,10 @@ class TambahBahanActivity : AppCompatActivity() {
                 viewModel.menambahkanBahanKeServer(bahanRequest)
             }
         }
+
+        iv_back_button.setOnClickListener {
+            onBackPressed()
+        }
     }
 
 

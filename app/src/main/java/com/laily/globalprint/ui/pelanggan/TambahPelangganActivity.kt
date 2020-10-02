@@ -51,6 +51,10 @@ class TambahPelangganActivity : AppCompatActivity() {
                 viewModel.menambahkanPelangganKeServer(pelangganRequest)
             }
         }
+
+        iv_back_button.setOnClickListener {
+            onBackPressed()
+        }
     }
 
 

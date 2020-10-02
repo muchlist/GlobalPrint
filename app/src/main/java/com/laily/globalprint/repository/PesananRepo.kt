@@ -1,9 +1,6 @@
 package com.laily.globalprint.repository
 
-import com.laily.globalprint.data.MessageResponse
-import com.laily.globalprint.data.PesananDetailResponse
-import com.laily.globalprint.data.PesananListResponse
-import com.laily.globalprint.data.PesananRequest
+import com.laily.globalprint.data.*
 import com.laily.globalprint.service.Api
 import com.laily.globalprint.service.ApiService
 import com.laily.globalprint.utils.App
@@ -176,6 +173,58 @@ object PesananRepo {
             }
 
             override fun onFailure(call: Call<PesananDetailResponse>, t: Throwable) {
+                t.message?.let {
+                    if (it.contains("to connect")){
+                        callback(null, ERR_CONN)
+                    } else {
+                        callback(null, it)
+                    }
+                }
+            }
+        })
+    }
+
+
+    fun reportsPesanan(
+        nama: String?,
+        lunas: String,
+        pelangganID: String,
+        body: PesananReportsRequest,
+        callback: (response: MessageResponse?, error: String) -> Unit
+    ) {
+        apiService.reportsPesanan(
+            token = App.prefs.authTokenSave,
+            nama = nama?:"",
+            lunas = lunas,
+            pelanggan = pelangganID,
+            args = body
+        ).enqueue(object : Callback<MessageResponse> {
+            override fun onResponse(
+                call: Call<MessageResponse>,
+                response: Response<MessageResponse>
+            ) {
+                when {
+                    response.isSuccessful -> {
+                        callback(response.body(), "")
+                    }
+                    response.code() == 400 || response.code() == 500 -> {
+                        val responseBody = response.errorBody()?.string() ?: ""
+                        callback(
+                            null,
+                            getMsgFromJson(responseBody)
+                        )
+                    }
+                    response.code() == 422 || response.code() == 401 -> {
+                        callback(null, "Token Expired")
+                        App.prefs.authTokenSave = ""
+                    }
+                    else -> {
+                        callback(null, response.code().toString())
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<MessageResponse>, t: Throwable) {
                 t.message?.let {
                     if (it.contains("to connect")){
                         callback(null, ERR_CONN)

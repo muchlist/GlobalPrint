@@ -185,6 +185,33 @@ interface ApiService {
 
 
 
+    //----------------------------------------- REPORTS
+    //{{url}}/api/pelanggan-reports
+    @POST("/api/pelanggan-reports")
+    fun reportsPelanggan(
+        @Header("Content-Type") contentType: String = "application/json",
+        @Header("Authorization") token: String,
+    ): Call<MessageResponse>
+
+    //{{url}}/api/bahan-reports
+    @GET("/api/bahan-reports")
+    fun reportsBahan(
+        @Header("Content-Type") contentType: String = "application/json",
+        @Header("Authorization") token: String,
+    ): Call<MessageResponse>
+
+    //{{url}}/api/pesanan-reports?nama=&lunas=&pelanggan=&bahan=
+    @POST("/api/pesanan-reports")
+    fun reportsPesanan(
+        @Header("Content-Type") contentType: String = "application/json",
+        @Header("Authorization") token: String,
+        @Query("nama") nama: String = "",
+        @Query("lunas") lunas: String = "", //1 lunas 0 piutang
+        @Query("pelanggan") pelanggan: String = "",
+        @Query("bahan") bahan: String = "",
+        @Body args: PesananReportsRequest,
+    ): Call<MessageResponse>
+
 
 
     // ---------------------------------------- CRUD
