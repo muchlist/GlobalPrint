@@ -30,6 +30,10 @@ class LaporanActivity : AppCompatActivity() {
             viewModel.mendapatkanUrlPdfPelanggan()
         }
 
+        cv_export_pesanan.setOnClickListener {
+            startActivity(Intent(this, LaporanPesananActivity::class.java))
+        }
+
 
     }
 
