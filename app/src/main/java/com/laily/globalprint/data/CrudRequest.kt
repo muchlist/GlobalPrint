@@ -1,8 +1,11 @@
 package com.laily.globalprint.data
 
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class CrudRequest(
     @Json(name = "alamat")
     val alamat: String,
@@ -10,4 +13,4 @@ data class CrudRequest(
     val keterangan: String,
     @Json(name = "nama")
     val nama: String
-)
+): Parcelable

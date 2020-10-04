@@ -213,9 +213,7 @@
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_marginTop="22dp"
-                    android:layout_marginBottom="65dp"
                     app:cardCornerRadius="10dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/cv_pelanggan"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="@+id/cv_pelanggan"
@@ -252,9 +250,7 @@
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_marginTop="22dp"
-                    android:layout_marginBottom="65dp"
                     app:cardCornerRadius="10dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/cv_karyawan"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="@+id/cv_karyawan"
@@ -272,6 +268,40 @@
                             android:layout_gravity="center"
                             android:layout_marginBottom="8dp"
                             android:text="LAPORAN"
+                            android:textSize="18sp" />
+
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+                <!--Crud-->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_crud"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="22dp"
+                    android:layout_marginBottom="65dp"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/cv_pelanggan"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="@+id/cv_pelanggan"
+                    app:layout_constraintTop_toBottomOf="@+id/cv_katalog">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="8dp"
+                            android:text="CRUD"
                             android:textSize="18sp" />
 
 
