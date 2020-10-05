@@ -1,5 +1,7 @@
 package com.laily.globalprint.ui.pemesanan
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -31,6 +33,10 @@ class PesananDetailActivity : AppCompatActivity() {
             false
         }
 
+        bt_pesanan_detail_cetak.setOnClickListener {
+            viewModel.mendapatkanUrlPdfPesanan()
+        }
+
     }
 
     private fun mengawasiViewModel() {
@@ -48,6 +54,7 @@ class PesananDetailActivity : AppCompatActivity() {
                     App.activityListPesananHarusDiRefresh = true
                 }
             })
+            urlTujuan.observe(this@PesananDetailActivity, { intentToDownloadPdf(it) })
         }
     }
 
@@ -87,6 +94,16 @@ class PesananDetailActivity : AppCompatActivity() {
             }
         tv_pesanan_detail_petugas.text = it.diupdateOleh
 
+    }
+
+    private fun intentToDownloadPdf(url: String) {
+        if (url.isNotEmpty()) {
+            val uri: Uri = Uri.parse(url)
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+            if (intent.resolveActivity(packageManager) != null) {
+                startActivity(intent)
+            }
+        }
     }
 
     private fun menampilkanLoading(isLoading: Boolean) {

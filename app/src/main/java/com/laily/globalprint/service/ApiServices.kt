@@ -212,6 +212,13 @@ interface ApiService {
         @Body args: PesananReportsRequest,
     ): Call<MessageResponse>
 
+    @GET("/api/pesanan-reports/{id}")
+    fun reportsPesananNota(
+        @Header("Content-Type") contentType: String = "application/json",
+        @Header("Authorization") token: String,
+        @Path("id") id: String,
+    ): Call<MessageResponse>
+
 
 
     // ---------------------------------------- CRUD

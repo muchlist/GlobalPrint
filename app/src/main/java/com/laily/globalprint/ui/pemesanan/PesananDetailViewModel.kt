@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.laily.globalprint.data.PesananDetailResponse
+import com.laily.globalprint.repository.PelangganRepo
 import com.laily.globalprint.repository.PesananRepo
+import com.laily.globalprint.utils.INTERNET_SERVER
 
 class PesananDetailViewModel : ViewModel() {
 
@@ -12,6 +14,10 @@ class PesananDetailViewModel : ViewModel() {
     fun getDataPesanan(): MutableLiveData<PesananDetailResponse> {
         return _dataPesanan
     }
+
+    private val _urlTujuan = MutableLiveData<String>()
+    val urlTujuan: LiveData<String>
+        get() = _urlTujuan
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean>
@@ -68,6 +74,28 @@ class PesananDetailViewModel : ViewModel() {
             response.let {
                 _dataPesanan.postValue(it)
                 _isPesananBerhasilDilunasi.value = true
+                _isLoading.value = false
+            }
+        }
+    }
+
+    fun mendapatkanUrlPdfPesanan() {
+        _isLoading.value = true
+        _messageError.value = ""
+        _urlTujuan.value = ""
+
+        PesananRepo.reportsPesananNota(pesananID = _dataPesanan.value?.id?:"") { response, error ->
+            if (error.isNotEmpty()) {
+                _isLoading.value = false
+                _messageError.value = error
+                return@reportsPesananNota
+            }
+            response?.let {
+
+                val url = INTERNET_SERVER + "static/pdf/" + it.msg
+
+                _isLoading.value = false
+                _urlTujuan.value = url
                 _isLoading.value = false
             }
         }
